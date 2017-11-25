@@ -1,0 +1,40 @@
+body {
+  font-family: 微軟正黑體;
+  /* 最大1.5倍 */
+  font-size: 1.2rem;
+}
+
+.img-container {
+  width: 500PX;
+  height: 500PX;
+  background-image: url('../images/pic1.jpg');
+  background-repeat: no-repeat;
+  /* cover以圖片為主  , contain以DIV為主*/
+  background-size: cover;
+  background-position: right center;
+  color: white;
+}
+
+.navbar{
+  /*     陰影向左 陰影向右 陰影模糊   3元色  透明度0~1         */
+  /*    text-shadow: 1px 1px 1px rgb(0, 0, 0,1); */
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+}
+
+img.cover {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  /* background-color: #000; */
+}
+
+footer {
+  font-size: 0.8rem;
+}
+
+.footer {
+  margin-top: 80px;
+}
+
+
+
