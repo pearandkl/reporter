@@ -103,3 +103,4 @@ function delete_article($sn)
     $db->query($sql) or die($db->error);
 
 }
+// move_uploaded_file($_FILES['pic']['tmp_name'], "uploads/{$sn}.{$ext}");
