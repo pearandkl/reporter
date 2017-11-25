@@ -83,6 +83,12 @@ function delete_article($sn)
     $sql = "DELETE FROM `article` WHERE sn='{$sn}' and username='{$_SESSION['username']}'";
     $db->query($sql) or die($db->error);
 
+    //刪除圖片
+    if (file_exists("uploads/cover_{$sn}.png")) {
+        unlink("uploads/cover_{$sn}.png");
+        unlink("uploads/thumb_{$sn}.png");
+    }
+
 }
 
 //更新文章
@@ -93,7 +99,7 @@ function update_article($sn)
     $content  = $db->real_escape_string($_POST['content']);
     $username = $db->real_escape_string($_POST['username']);
 
-    $sql = "UPDATE `article` SET `title`='{$title}', `content`='{$content}', `update_time`= NOW() WHERE `sn`='{$sn}'";
+    $sql = "UPDATE `article` SET `title`='{$title}', `content`='{$content}', `update_time`= NOW() WHERE `sn`='{$sn}' and username='{$_SESSION['username']}' ";
     $db->query($sql) or die($db->error);
 
     upload_pic($sn);
