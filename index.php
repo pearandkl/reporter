@@ -55,26 +55,6 @@ function list_article()
     $smarty->assign('all', $all);
 }
 
-//讀出單一文章
-function show_article($sn)
-{
-    global $db, $smarty;
-
-    require_once 'HTMLPurifier/HTMLPurifier.auto.php';
-    $config   = HTMLPurifier_Config::createDefault();
-    $purifier = new HTMLPurifier($config);
-
-    $sql    = "SELECT * FROM `article` WHERE `sn`='$sn'";
-    $result = $db->query($sql) or die($db->error);
-    //一次只會抓一筆資料
-    $data = $result->fetch_assoc();
-    //過濾存入的文章有惡意語法
-    $data['content'] = $purifier->purify($data['content']);
-    // die(var_dump($data));
-    //送article到樣版檔
-    $smarty->assign('article', $data);
-}
-
 //套用樣板
 // $smarty->display('index.tpl');
 //套用樣板

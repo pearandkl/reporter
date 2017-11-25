@@ -37,6 +37,15 @@ switch ($op) {
     case "article_form":
         break;
 
+    case "modify_article":
+        show_article($sn);
+        break;
+
+    case 'update':
+        update_article($sn);
+        header("location: index.php?sn={$sn}");
+        exit;
+
     default:
         $op = "";
 // 即預設動作，當變數跟任一個「特定值」都不相符時要進行的動作，一般放在最下方
@@ -62,35 +71,7 @@ function insert_article()
     $db->query($sql) or die($db->error);
     $sn = $db->insert_id;
 
-    if (isset($_FILES)) {
-        require_once 'class.upload.php';
-        $foo = new Upload($_FILES['pic']);
-        if ($foo->uploaded) {
-            // save uploaded image with a new name
-            //將上傳圖片大到1200
-            $foo->file_new_name_body = 'cover_' . $sn;
-            $foo->image_resize       = true;
-            $foo->image_convert      = png;
-            $foo->image_x            = 1200;
-            $foo->image_ratio_y      = true;
-            $foo->Process('uploads/');
-            //如果大圖失敗，小圖就不用做，成功的話小圖縮小成400
-            if ($foo->processed) {
-                $foo->file_new_name_body = 'thumb_' . $sn;
-                $foo->image_resize       = true;
-                $foo->image_convert      = png;
-                $foo->image_x            = 400;
-                $foo->image_ratio_y      = true;
-                $foo->Process('uploads/');
-            }
-        }
-
-        // $ext = pathinfo($_FILES['pic']['name'], PATHINFO_EXTENSION);
-        // if (!is_dir('uploads')) {
-        //     mkdir('uploads');
-        // }
-        // move_uploaded_file($_FILES['pic']['tmp_name'], "uploads/{$sn}.{$ext}");
-    }
+    upload_pic($sn);
 
     return $sn;
 }
@@ -103,4 +84,51 @@ function delete_article($sn)
     $db->query($sql) or die($db->error);
 
 }
-// move_uploaded_file($_FILES['pic']['tmp_name'], "uploads/{$sn}.{$ext}");
+
+//更新文章
+function update_article($sn)
+{
+    global $db;
+    $title    = $db->real_escape_string($_POST['title']);
+    $content  = $db->real_escape_string($_POST['content']);
+    $username = $db->real_escape_string($_POST['username']);
+
+    $sql = "UPDATE `article` SET `title`='{$title}', `content`='{$content}', `update_time`= NOW() WHERE `sn`='{$sn}'";
+    $db->query($sql) or die($db->error);
+
+    upload_pic($sn);
+
+    return $sn;
+}
+
+//上傳團片
+function upload_pic($sn)
+{
+
+    if (isset($_FILES)) {
+        require_once 'class.upload.php';
+        $foo = new Upload($_FILES['pic']);
+        if ($foo->uploaded) {
+            // save uploaded image with a new name
+            $foo->file_new_name_body = 'cover_' . $sn;
+            $foo->image_resize       = true;
+            $foo->image_convert      = png;
+            $foo->image_x            = 1200;
+            $foo->image_ratio_y      = true;
+            $foo->Process('uploads/');
+            if ($foo->processed) {
+                $foo->file_new_name_body = 'thumb_' . $sn;
+                $foo->image_resize       = true;
+                $foo->image_convert      = png;
+                $foo->image_x            = 400;
+                $foo->image_ratio_y      = true;
+                $foo->Process('uploads/');
+            }
+        }
+    }
+    // $ext = pathinfo($_FILES['pic']['name'], PATHINFO_EXTENSION);
+    // if (!is_dir('uploads')) {
+    //     mkdir('uploads');
+    // }
+    // move_uploaded_file($_FILES['pic']['tmp_name'], "uploads/{$sn}.{$ext}");
+}
