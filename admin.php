@@ -92,6 +92,7 @@ function delete_article($sn)
 }
 
 //更新文章
+//更新文章
 function update_article($sn)
 {
     global $db;
