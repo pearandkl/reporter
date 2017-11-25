@@ -77,3 +77,4 @@ function show_article($sn)
 
 //套用樣板
 // $smarty->display('index.tpl');
+//套用樣板
