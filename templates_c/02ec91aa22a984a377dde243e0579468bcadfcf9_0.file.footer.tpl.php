@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-11-18 07:52:59
+/* Smarty version 3.1.30, created on 2017-11-25 08:07:43
   from "D:\qmo\UniServerZ\www\reporter\templates\footer.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a0fe6db641956_96252411',
+  'unifunc' => 'content_5a1924cf427c69_35522240',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '02ec91aa22a984a377dde243e0579468bcadfcf9' => 
     array (
       0 => 'D:\\qmo\\UniServerZ\\www\\reporter\\templates\\footer.tpl',
-      1 => 1510991574,
+      1 => 1511597004,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a0fe6db641956_96252411 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a1924cf427c69_35522240 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="footer"></div>
 <footer class="bg-dark text-white fixed-bottom">
@@ -34,9 +34,7 @@ function content_5a0fe6db641956_96252411 (Smarty_Internal_Template $_smarty_tpl)
 
 
 
-<?php echo '<script'; ?>
- src="js/jquery-3.2.1.min.js"><?php echo '</script'; ?>
->
+
 <?php echo '<script'; ?>
  src="js/popper.min.js"><?php echo '</script'; ?>
 >
